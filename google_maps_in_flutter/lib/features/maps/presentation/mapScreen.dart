@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_in_flutter/features/maps/presentation/fullscreen_map.dart';
+import 'package:google_maps_in_flutter/features/pdf/presentation/pdf_view.dart';
 
 import 'bloc/location_bloc.dart';
 import 'bloc/location_event.dart';
@@ -16,19 +17,27 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("data"),),
-      body: Center(
-      child: Column(
-        children: [
-          ElevatedButton(
-              onPressed: () {
-                myLocation();
-              },
-              child: const Text("obtener mi ubicacion"))
-        ],
-      ),
-    )
-    );
+        appBar: AppBar(
+          title: Text("data"),
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  myLocation();
+                },
+                child: const Text("obtener mi ubicacion"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // viewPdf();
+                },
+                child: const Text("ver pdf"),
+              ),
+            ],
+          ),
+        ));
   }
 
   void myLocation() {
@@ -48,8 +57,29 @@ class _MapScreenState extends State<MapScreen> {
         },
         // ... Otros parámetros de PageRouteBuilder);
 
-        pageBuilder: (_,__,___) => const FullScreenMap(),
+        pageBuilder: (_, __, ___) => const FullScreenMap(),
       ),
     );
   }
+//   void viewPdf() {
+//     context.read<LocationBloc>().add(RequestLocationEvent());
+//     Navigator.push(
+//       // context,
+//       // PageRouteBuilder(
+//       //   transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       //     return SlideTransition(
+//       //       position: Tween(
+//       //         begin:
+//       //             const Offset(1, 0), // Cambia aquí para iniciar desde arriba
+//       //         end: Offset.zero,
+//       //       ).animate(animation),
+//       //       child: child,
+//       //     );
+//       //   },
+//         // ... Otros parámetros de PageRouteBuilder);
+
+//         // pageBuilder: (_, __, ___) => const PdfView(),
+//     //   ),
+//     // );
+//   }
 }
